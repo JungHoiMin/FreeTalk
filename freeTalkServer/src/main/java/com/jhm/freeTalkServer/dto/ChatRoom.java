@@ -1,6 +1,5 @@
 package com.jhm.freeTalkServer.dto;
 
-import com.jhm.freeTalkServer.config.WebSocketHandler;
 import com.jhm.freeTalkServer.service.ChatService;
 import lombok.Builder;
 import lombok.Getter;
