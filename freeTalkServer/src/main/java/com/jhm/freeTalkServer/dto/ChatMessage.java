@@ -1,10 +1,10 @@
 package com.jhm.freeTalkServer.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class ChatMessage {
     public enum MessageType{
         ENTER, TALK

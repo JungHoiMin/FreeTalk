@@ -2,13 +2,14 @@ package com.jhm.freeTalkServer.dto;
 
 import com.jhm.freeTalkServer.service.ChatService;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
+@Data
 public class ChatRoom {
     private String roomId;
     private String name;
