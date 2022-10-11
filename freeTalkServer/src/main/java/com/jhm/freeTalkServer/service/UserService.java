@@ -4,6 +4,7 @@ import com.jhm.freeTalkServer.model.UserEntity;
 import com.jhm.freeTalkServer.persistence.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -12,7 +13,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserEntity create(final UserEntity user){
+    public void create(final UserEntity user){
         if (user == null || user.getTel() == null){
             throw new RuntimeException("Invalid arguments");
         }
@@ -21,6 +22,15 @@ public class UserService {
             log.warn("Tel alread exists {}", tel);
             throw new RuntimeException("Tel alread exists");
         }
-        return userRepository.save(user);
+        userRepository.save(user);
+    }
+
+    public UserEntity getByCredentials(final String tel, final String passwd, final PasswordEncoder encoder){
+        final UserEntity originalUser = userRepository.findByTel(tel);
+
+        if (originalUser != null && encoder.matches(passwd, originalUser.getPasswd())){
+            return originalUser;
+        }
+        return null;
     }
 }
